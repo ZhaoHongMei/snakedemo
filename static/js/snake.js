@@ -1,12 +1,13 @@
-$(function fn(){
+function fn(){
 	var baseFontSize = window.innerWidth/50;
 	$("html").css("font-size",baseFontSize);
-});
-//$(window).resize(function(){
-//	fn();
-//})
+}
+fn();
+$(window).resize(function(){
+	fn();
+})
 
-//homepage页面，
+//homepage页面
 
 //音乐点击按钮
 var mFlag=true;
@@ -14,12 +15,19 @@ $("#music").click(function(){
 	if(mFlag){
 		$("audio")[0].pause();
 		//应该加换一张静音的背景图片
-		
+//		$("#music").css("background-image","../img/music.bmp");	
 		mFlag=false;
 	}else{
 		$("audio")[0].play();
+		mFlag=true;
 	}	
 })
+
+//点击设置按钮出现菜单设置
+//$("#func").click(function(){
+//	$("#main").css("display","block");
+//})
+
 //点击开始按钮，隐藏homepage，进入gamepage
 $("#play").click(function(){
 	$("#homePage").css("display","none");
@@ -53,8 +61,8 @@ function Snake() {
 	//蛇的属性
 	this.canvas = $("#gameview")[0]; //canvas画布对象
 	this.ctx = this.canvas.getContext("2d"); //画笔
-	this.width = 500; //背景（游戏屏幕）的宽度
-	this.height = 500; //背景（游戏屏幕）的高度
+	this.width = 1000; //背景（游戏屏幕）的宽度
+	this.height = 800; //背景（游戏屏幕）的高度
 	this.step = 15; //设计步长
 	this.stepX = Math.floor(this.width / this.step); //X轴步数
 	this.stepY = Math.floor(this.height / this.step); //Y轴步数
