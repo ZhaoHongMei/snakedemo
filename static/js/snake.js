@@ -36,7 +36,27 @@ $("#play").click(function(){
 	var snakegame = new Snake();
 	snakegame.start();
 })
-
+//定义一个速度变量，改变速度
+var x=200;
+$(".speedD").click(function(){
+	switch ($(this).html()){
+		case "简单":
+		    x=400;
+		    console.log(x);
+			break;
+		case "一般":
+			x=200;
+			console.log(x);
+			break;
+		case "复杂":
+			x=100;
+			console.log(x);
+	}
+})
+//定义一个变量改变y，皮肤
+$(".skinD").click(function(){
+	
+})
 //gamepage页面
 var northImg = new Image();
 northImg.src = "static/img/north.png";
@@ -61,9 +81,9 @@ function Snake() {
 	//蛇的属性
 	this.canvas = $("#gameview")[0]; //canvas画布对象
 	this.ctx = this.canvas.getContext("2d"); //画笔
-	this.width = 1000; //背景（游戏屏幕）的宽度
-	this.height = 800; //背景（游戏屏幕）的高度
-	this.step = 15; //设计步长
+	this.width = 500; //背景（游戏屏幕）的宽度
+	this.height = 500; //背景（游戏屏幕）的高度
+	this.step = 25; //设计步长
 	this.stepX = Math.floor(this.width / this.step); //X轴步数
 	this.stepY = Math.floor(this.height / this.step); //Y轴步数
 	this.snakeBodyList = []; //设置蛇身数组
@@ -310,7 +330,7 @@ function Snake() {
 				_this.paint();//重绘游戏画面(背景+蛇+食物)
 			}
 //		_this.paint();//重绘游戏画面
-		},200);
+		},x);
 	}
 	/*
 	 * 4-蛇死（碰到边界或碰到自身--dead 弹出得分界面）
