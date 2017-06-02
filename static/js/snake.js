@@ -5,8 +5,13 @@ function fn(){
 fn();
 $(window).resize(function(){
 	fn();
+	console.log("屏幕宽度："+document.body.clientWidth);
 })
 
+//window.addEventListener("resize",function(){
+//	
+//},false);
+			
 //homepage页面
 
 //音乐点击按钮
@@ -55,7 +60,18 @@ $(".speedD").click(function(){
 })
 //定义一个变量改变y，皮肤
 $(".skinD").click(function(){
-	
+//	console.log($(this).index());
+	switch ($(this).index()){
+		case 0:
+		    bgImg.src = "static/img/background.png";
+		    console.log(x);
+			break;
+		case 1:
+			bgImg.src="http://pic.qiantucdn.com/58pic/18/09/96/27F58PICdDC_1024.jpg"
+			break;
+		case 2:
+			bgImg.src="http://pic.58pic.com/58pic/13/22/15/87458PICudg_1024.jpg"
+	}
 })
 //gamepage页面
 var northImg = new Image();
@@ -343,7 +359,7 @@ function Snake() {
 		var headX=this.snakeBodyList[0].x;
 		var headY=this.snakeBodyList[0].y;
 		//、判断边界
-		if(headX < LEFT_END-1 || headY < NORTH_END-1 ||headX > RIGHT_END || headY > SOUTH_END){
+		if(headX < LEFT_END || headY < NORTH_END ||headX > RIGHT_END|| headY > SOUTH_END){
 			this.isDead=true;
 			return;//精简判断过程；
 		}
