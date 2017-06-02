@@ -29,7 +29,7 @@ html,body{
 	background-size: 100% 100%;
 	position:absolute;
 	top:86%;
-	left:12%;
+	left:35%;
 }
 #music{
 	width:3%;
@@ -39,7 +39,7 @@ html,body{
 	background-size: 100% 100%;
 	position:absolute;
 	top:76%;
-	left:18%;
+	left:40%;
 }
 #auhotr{
 	width:30%;
@@ -61,7 +61,7 @@ html,body{
 	background-size: 100% 100%;
 	position:absolute;
 	top:76%;
-	left:30%;
+	left:52%;
 }
 #main{
 	width:50%;
@@ -93,6 +93,7 @@ html,body{
 }
 #backgroungImg{
 	border:1px solid transparent;
+	height:20%;
 }
 .backgroungImgD{
 	float:left;
@@ -157,6 +158,9 @@ canvas{
 		width:10%;
 		left:55%;
 	}
+	#backgroungImg{
+		height:40%;
+	}
 }
 
 /*点击func之后出现的充值画面*/
@@ -194,12 +198,11 @@ canvas{
 	text-align: center;
 }
 /*皮肤显示*/
-/*#snakeSkin{
+#snakeSkin{
 	margin-top: 2%;
-}*/
+}
 .sSkin img{
 	/*display: inline-block;*/
 	width:15%;
-	height:15%;
-	
+	height:15%;	
 }

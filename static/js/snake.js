@@ -43,11 +43,13 @@ $("#chargeOk").click(function(){
 
 //点击开始按钮，隐藏homepage，进入gamepage
 $("#play").click(function(){
+	$("audio")[0].pause();
 	$("#homePage").css("display","none");
 	$("#gamePage").css("display","block");
 	$("audio")[1].play();
 	var snakegame = new Snake();
 	snakegame.start();
+	
 })
 //定义一个速度变量，改变速度
 var x=200;
@@ -66,13 +68,12 @@ $(".speedD").click(function(){
 			console.log(x);
 	}
 })
-//定义一个变量改变y，皮肤
-$(".skinD").click(function(){
-//	console.log($(this).index());
+//定义一个变量改变y，改变背景
+$(".backgroungImgD").click(function(){
+	console.log($(this).index());
 	switch ($(this).index()){
 		case 0:
 		    bgImg.src = "static/img/background.png";
-		    console.log(x);
 			break;
 		case 1:
 			bgImg.src="http://pic.qiantucdn.com/58pic/18/09/96/27F58PICdDC_1024.jpg"
@@ -94,6 +95,11 @@ var bodyImg = new Image();
 bodyImg.src = "static/img/body.png";
 var foodImg = new Image();
 foodImg.src = "static/img/food.png";
+var foodImg2=new Image();
+foodImg2.src="static/img/food1.png";
+var foodImg3=new Image();
+foodImg3.src= "static/img/food2.png";
+var n=parseInt(Math.random()*3);
 var bgImg = new Image();
 bgImg.src = "static/img/background.png";
 //将欢迎界面的图片放在最后，表示加载成功后，其他图片已经加载完毕，无需再进行onload判断
@@ -198,7 +204,7 @@ function Snake() {
 
 		//2.3.1当食物已经存在的时候，画面刷新时，食物在原有位置重绘
 		if(this.foodList.length > 0) {
-			var fnode = this.foodList[0];
+			var fnode = this.foodList[n];
 			this.ctx.drawImage(fnode.img, fnode.x * this.step, fnode.y * this.step, this.step, this.step);
 			return;
 		}
@@ -221,7 +227,17 @@ function Snake() {
 				y: foodY,
 				img: foodImg
 			}); //新生成一个食物
-			var fnode = this.foodList[0];
+			this.foodList.push({
+				x: foodX,
+				y: foodY,
+				img: foodImg2
+			});//新生成一个食物
+			this.foodList.push({
+				x: foodX,
+				y: foodY,
+				img: foodImg3
+			});   //否则，新生成一个食物	
+			var fnode = this.foodList[n];
 			this.ctx.drawImage(fnode.img, fnode.x * this.step, fnode.y * this.step, this.step, this.step);
 		}
 
@@ -325,7 +341,7 @@ function Snake() {
 			_this.dead();
 			if(_this.isDead){
 				//alert你最终的分数
-//				alert("Yours score is："+_this.score);
+				alert("Yours score is："+_this.score);
 				clearInterval(_this.timer);//否则蛇会越来越快
 				_this.isDead=false;//改变isDead状态，否则每次都直接死掉
 				_this.snakeBodyList=[];//一直刷新alert
@@ -336,12 +352,23 @@ function Snake() {
 				_this.eat();//判断食物是否被吃.isEaten
 				if(_this.isEaten){
 //					console.log("eaten");
-					_this.isEaten=false;
+					_this.isEaten=false;//变回没被吃的标识
 					//清空食物组
 					_this.foodList=[];
-					_this.score +=10;
+					switch(n){
+						case 0:
+							_this.score +=10;
+						break;
+						case 1:
+							_this.score +=20;
+						break;
+						case 2:
+							_this.score +=30;
+						break;
+					}
 					//蛇身长一节
 					var lastNodeIndex=_this.snakeBodyList.length;
+					n=parseInt(Math.random()*3);
 					_this.snakeBodyList[lastNodeIndex]={
 						x:-2,
 						y:-2, 
@@ -385,8 +412,8 @@ function Snake() {
 	this.eat = function(){
 		var HEAD_X=this.snakeBodyList[0].x;//蛇头横坐标
 		var HEAD_Y=this.snakeBodyList[0].y;//蛇头横坐标
-		var FOOD_X=this.foodList[0].x;//食物横坐标
-		var FOOD_Y=this.foodList[0].y;//食物纵坐标
+		var FOOD_X=this.foodList[n].x;//食物横坐标
+		var FOOD_Y=this.foodList[n].y;//食物纵坐标
 		if(HEAD_X==FOOD_X && HEAD_Y==FOOD_Y){
 			this.isEaten=true;
 		}
