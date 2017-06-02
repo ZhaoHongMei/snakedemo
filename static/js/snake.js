@@ -15,9 +15,10 @@ $(window).resize(function(){
 //homepage页面
 
 //音乐点击按钮
-var mFlag=true;
+var mFlag=true;//true-音乐开着 false音乐关着 
 $("#music").click(function(){
 	if(mFlag){
+		console.log("啊");
 		$("audio")[0].pause();
 		//应该加换一张静音的背景图片
 //		$("#music").css("background-image","../img/music.bmp");	
@@ -28,10 +29,17 @@ $("#music").click(function(){
 	}	
 })
 
-//点击设置按钮出现菜单设置
-//$("#func").click(function(){
-//	$("#main").css("display","block");
-//})
+//点击充值func按钮出现充值画面设置
+$("#func").click(function(){
+	$("#main").css("display","none");
+	$("#charge").css("display","block");
+})
+
+$("#chargeOk").click(function(){
+	$("#main").css("display","block");
+	$("#charge").css("display","none");
+})
+
 
 //点击开始按钮，隐藏homepage，进入gamepage
 $("#play").click(function(){
